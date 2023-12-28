@@ -1,0 +1,11 @@
+{
+  "name": "alpinejs-explorations-",
+  "version": "1.0.0",
+  "description": "Welcome to the source code repository for the comprehensive  Alpine.js tutorial! Alpine.js is a rugged, minimal framework for composing JavaScript behavior in your markup. This course is meticulously partitioned into three digestible segments to cater to both budding and seasoned developers alike.",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "tailwind" : "tailwindcss -i ./src/input.css -o ./dist/output.css --watch" 
+  },
+  "author": "",
+  "license": "ISC"
+}

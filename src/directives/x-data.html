@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../dist/output.css" rel="stylesheet">
+    <title>X-Data </title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Include Day.js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+</head>
+
+<body class="p-8 grid grid-cols-4 gap-5">
+
+    <!-- Increment an item without local storage -->
+    <div x-data="{ count: 0 }">
+        <h1 class="text-3xl font-bold mb-4">Increment an item without local storage</h1>
+
+        <div class="bg-white p-4 rounded-md shadow-md">
+            <p class="text-lg mb-2">Count: <span x-text="count"></span></p>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-md" @click="count++">
+                Increment
+            </button>
+        </div>
+    </div>
+
+    <!-- Increment an item with local storage -->
+    <div x-data="{ count: parseInt(localStorage.getItem('count')) || 0 }"
+        x-init="() => localStorage.setItem('count', count)">
+        <h1 class="text-3xl font-bold mb-4">Increment an item with local storage</h1>
+
+        <div class="bg-white p-4 rounded-md shadow-md">
+            <p class="text-lg mb-2">Count: <span x-text="count"></span></p>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-md"
+                @click="count++; localStorage.setItem('count', count)">
+                Increment
+            </button>
+        </div>
+    </div>
+
+    <!-- Increment an item with local storage -->
+    <div class="col-span-2" x-data="{ count2: parseInt(localStorage.getItem('count2')) || 0 }"
+        x-init="() => localStorage.setItem('count2', count2)">
+        <h1 class="text-3xl font-bold mb-4">Increment and decrement item with local storage</h1>
+
+        <div class="bg-white p-4 rounded-md shadow-md">
+            <p class="text-lg mb-2">Count: <span x-text="count2"></span></p>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-md"
+                @click="count2++; localStorage.setItem('count2', count2)">
+                Increment
+            </button>
+            <button class="bg-red-500 text-white px-4 py-2 rounded-md"
+                @click="count2--; localStorage.setItem('count2', count2)">
+                dec
+            </button>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Simple Example -->
+    <div class="col-span-4" x-data="{ cart: [] }">
+        <h1 class="text-3xl font-bold mb-4">Shopping Cart Simple Example</h1>
+
+        <!-- Product List -->
+        <div class="grid grid-cols-3 gap-4">
+            <div x-data="{ product: 'Product A', price: 10 }" class="bg-white p-4 rounded-md shadow-md">
+                <p class="text-lg mb-2" x-text="product"></p>
+                <p class="text-gray-500" x-text="'$' + price"></p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-2"
+                    @click="cart.push({ product: product, price: price })">
+                    Add to Cart
+                </button>
+            </div>
+            <div x-data="{ product: 'Product B', price: 20 }" class="bg-white p-4 rounded-md shadow-md">
+                <p class="text-lg mb-2" x-text="product"></p>
+                <p class="text-gray-500" x-text="'$' + price"></p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-2"
+                    @click="cart.push({ product: product, price: price })">
+                    Add to Cart
+                </button>
+            </div>
+            <div x-data="{ product: 'Product C', price: 30 }" class="bg-white p-4 rounded-md shadow-md">
+                <p class="text-lg mb-2" x-text="product"></p>
+                <p class="text-gray-500" x-text="'$' + price"></p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md mt-2"
+                    @click="cart.push({ product: product, price: price })">
+                    Add to Cart
+                </button>
+            </div>
+            <!-- Add more product cards here... -->
+        </div>
+
+        <!-- Shopping Cart Display -->
+        <div class="mt-8 mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
+            <ul>
+                <template x-for="(item, index) in cart" :key="index">
+                    <li class="mb-2">
+                        <span x-text="item.product"></span> - <span x-text="'$' + item.price"></span>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Display Current Date and Time -->
+    <div x-data="{ currentDateTime: dayjs().format('YYYY-MM-DD HH:mm:ss') }" x-init="initClock">
+        <p>Current DateTime: <span x-text="currentDateTime"></span></p>
+    </div>
+
+    <!-- Show Alert Message -->
+    <div x-data="{ showMessage: function() { alert('Hello, Alpine.js!'); } }">
+        <button @click="showMessage">Show Message</button>
+    </div>
+
+    <!-- Toggle Menu Example -->
+    <div x-data="{ open: false }">
+        <button @click="open = !open" class="px-4 py-2 bg-blue-500 text-white font-bold rounded focus:outline-none">
+            Toggle Menu
+        </button>
+
+        <div x-show="open" class="mt-2 p-4 bg-white shadow-lg rounded" style="display: none;">
+            <a href="#" class="block text-sm px-2 py-1 text-gray-700 hover:bg-blue-500 hover:text-white">Option
+                1</a>
+            <a href="#" class="block text-sm px-2 py-1 text-gray-700 hover:bg-blue-500 hover:text-white">Option
+                2</a>
+            <a href="#" class="block text-sm px-2 py-1 text-gray-700 hover:bg-blue-500 hover:text-white">Option
+                3</a>
+            <!-- You can add more options to this list -->
+        </div>
+    </div>
+
+
+
+    <script>
+        function initClock() {
+            setInterval(() => {
+                this.currentDateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
