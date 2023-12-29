@@ -11,28 +11,30 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
 </head>
 
-<body class="p-8 grid grid-cols-4 gap-5">
+<body class="p-16 grid grid-cols-1  xl:grid-cols-4 gap-5 bg-slate-900">
 
     <!-- Increment an item without local storage -->
-    <div x-data="{ count: 0 }">
-        <h1 class="text-3xl font-bold mb-4">Increment an item without local storage</h1>
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 " x-data="{ count: 0 }">
+        <h1 class="text-xl text-white font-bold h-12 mb-4">Increment an item without local storage</h1>
 
         <div class="bg-white p-4 rounded-md shadow-md">
             <p class="text-lg mb-2">Count: <span x-text="count"></span></p>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded-md" @click="count++">
+            <button class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
+                @click="count++">
                 Increment
             </button>
         </div>
     </div>
 
     <!-- Increment an item with local storage -->
-    <div x-data="{ count: parseInt(localStorage.getItem('count')) || 0 }"
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700"
+        x-data="{ count: parseInt(localStorage.getItem('count')) || 0 }"
         x-init="() => localStorage.setItem('count', count)">
-        <h1 class="text-3xl font-bold mb-4">Increment an item with local storage</h1>
+        <h1 class="text-xl text-white font-bold h-12 mb-4">Increment an item with local storage</h1>
 
         <div class="bg-white p-4 rounded-md shadow-md">
             <p class="text-lg mb-2">Count: <span x-text="count"></span></p>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded-md"
+            <button class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
                 @click="count++; localStorage.setItem('count', count)">
                 Increment
             </button>
@@ -40,17 +42,18 @@
     </div>
 
     <!-- Increment an item with local storage -->
-    <div class="col-span-2" x-data="{ count2: parseInt(localStorage.getItem('count2')) || 0 }"
+    <div class="col-span-2 bg-slate-800 p-8 rounded-md border border-gray-700"
+        x-data="{ count2: parseInt(localStorage.getItem('count2')) || 0 }"
         x-init="() => localStorage.setItem('count2', count2)">
-        <h1 class="text-3xl font-bold mb-4">Increment and decrement item with local storage</h1>
+        <h1 class="text-xl text-white h-12  font-bold mb-4">Increment and decrement item with local storage</h1>
 
         <div class="bg-white p-4 rounded-md shadow-md">
             <p class="text-lg mb-2">Count: <span x-text="count2"></span></p>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded-md"
+            <button class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
                 @click="count2++; localStorage.setItem('count2', count2)">
                 Increment
             </button>
-            <button class="bg-red-500 text-white px-4 py-2 rounded-md"
+            <button class="bg-red-500 hover:bg-red-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
                 @click="count2--; localStorage.setItem('count2', count2)">
                 dec
             </button>
@@ -58,8 +61,8 @@
     </div>
 
     <!-- Shopping Cart Simple Example -->
-    <div class="col-span-4" x-data="{ cart: [] }">
-        <h1 class="text-3xl font-bold mb-4">Shopping Cart Simple Example</h1>
+    <div class="col-span-2 mt-8 bg-slate-800 p-8 rounded-md border border-gray-700" x-data="{ cart: [] }">
+        <h1 class="text-xl text-white font-bold mb-4">Shopping Cart Simple Example</h1>
 
         <!-- Product List -->
         <div class="grid grid-cols-3 gap-4">
@@ -92,10 +95,10 @@
 
         <!-- Shopping Cart Display -->
         <div class="mt-8 mx-auto text-center">
-            <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
+            <h2 class="text-2xl font-bold mb-4 text-white">Shopping Cart</h2>
             <ul>
                 <template x-for="(item, index) in cart" :key="index">
-                    <li class="mb-2">
+                    <li class="mb-2 text-white">
                         <span x-text="item.product"></span> - <span x-text="'$' + item.price"></span>
                     </li>
                 </template>
@@ -104,18 +107,24 @@
     </div>
 
     <!-- Display Current Date and Time -->
-    <div x-data="{ currentDateTime: dayjs().format('YYYY-MM-DD HH:mm:ss') }" x-init="initClock">
-        <p>Current DateTime: <span x-text="currentDateTime"></span></p>
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 mt-8 flex flex-col justify-center items-center"
+        x-data="{ currentDateTime: dayjs().format('YYYY-MM-DD HH:mm:ss') }" x-init="initClock">
+        <p class="flex flex-col justify-center items-center text-white text-xl  font-bold mb-4">Current DateTime: <span
+                class="text-sky-500" x-text="currentDateTime"></span></p>
     </div>
 
     <!-- Show Alert Message -->
-    <div x-data="{ showMessage: function() { alert('Hello, Alpine.js!'); } }">
-        <button @click="showMessage">Show Message</button>
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 mt-8 flex flex-col justify-center items-center"
+        x-data="{ showMessage: function() { alert('Hello, Alpine.js!'); } }">
+        <button class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
+            @click="showMessage">Show Message</button>
     </div>
 
     <!-- Toggle Menu Example -->
-    <div x-data="{ open: false }">
-        <button @click="open = !open" class="px-4 py-2 bg-blue-500 text-white font-bold rounded focus:outline-none">
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 mt-8 flex flex-col justify-center items-center"
+        x-data="{ open: false }">
+        <button @click="open = !open"
+            class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md">
             Toggle Menu
         </button>
 
@@ -131,7 +140,7 @@
     </div>
 
 
-
+    <!-- date & time  -->
     <script>
         function initClock() {
             setInterval(() => {
