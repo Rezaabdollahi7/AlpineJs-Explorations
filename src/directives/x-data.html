@@ -13,6 +13,73 @@
 
 <body class="p-16 grid grid-cols-1  xl:grid-cols-4 gap-5 bg-slate-900">
 
+    <!-- How to Use x-data & x-text & x-html -->
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 ">
+        <h1 class="text-xl text-white font-bold h-12 mb-4">How to Use x-data & x-text & x-html</h1>
+        <div x-data="{text:'i am text'  , message:'I am <b>x-data</b> message with x-html'}">
+            <p class="text-white" x-text="text"></p>
+            <p class="text-white" x-html="message"></p>
+        </div>
+    </div>
+
+    <!-- x-data with method -->
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 ">
+        <h1 class="text-xl text-white font-bold h-12 mb-4">x-data with method</h1>
+        <div class="text-white" x-data="{
+            message: '❤️ Like',
+            count: 0,
+            change() {
+                this.count++;
+                if (this.count % 2 === 0) {
+                    this.message = '❤️ Like';
+                } else {
+                    this.message = '💔 Disliked';
+                }
+            }
+        }">
+            <button @click="change()">
+                <span x-text="message"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- make dropDown with method -->
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 ">
+        <h1 class="text-xl text-white font-bold h-12 mb-4">make dropDown with method</h1>
+        <div class="text-white" x-data="{
+                open:false ,
+                Toggle(){
+                    this.open = !this.open;
+                }
+            }
+            ">
+            <button @click="Toggle">Open/Close</button>
+            <div x-show="open">
+                your content
+            </div>
+        </div>
+    </div>
+
+    <!-- use alpine data & make Re usable data -->
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 ">
+        <h1 class="text-xl text-white font-bold h-12 mb-4">make dropDown with init (Re usable data)</h1>
+        <div class="text-white" x-data="dropdown">
+            <button @click="Toggle">Open/Close</button>
+            <div x-show="open">
+                your content
+            </div>
+        </div>
+    </div>
+
+    <!-- use alpine sore for write somthing -->
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 ">
+        <h1 class="text-xl text-white font-bold h-12 mb-4">Data Coming From Store</h1>
+        <div class="hover:cursor-pointer text-white" x-data>
+            <p x-text="$store.currentUser.username"></p>
+            <p x-text="$store.currentUser.articles[0]"></p>
+        </div>
+    </div>
+
     <!-- Increment an item without local storage -->
     <div class="bg-slate-800 p-8 rounded-md border border-gray-700 " x-data="{ count: 0 }">
         <h1 class="text-xl text-white font-bold h-12 mb-4">Increment an item without local storage</h1>
@@ -41,7 +108,14 @@
         </div>
     </div>
 
-    <!-- Increment an item with local storage -->
+    <!-- Show Alert Message -->
+    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 mt-8 flex flex-col justify-center items-center"
+        x-data="{ showMessage: function() { alert('Hello, Alpine.js!'); } }">
+        <button class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
+            @click="showMessage">Show Message</button>
+    </div>
+
+    <!-- Increment and decrement item with local storage -->
     <div class="col-span-2 bg-slate-800 p-8 rounded-md border border-gray-700"
         x-data="{ count2: parseInt(localStorage.getItem('count2')) || 0 }"
         x-init="() => localStorage.setItem('count2', count2)">
@@ -113,13 +187,6 @@
                 class="text-sky-500" x-text="currentDateTime"></span></p>
     </div>
 
-    <!-- Show Alert Message -->
-    <div class="bg-slate-800 p-8 rounded-md border border-gray-700 mt-8 flex flex-col justify-center items-center"
-        x-data="{ showMessage: function() { alert('Hello, Alpine.js!'); } }">
-        <button class="bg-sky-500 hover:bg-sky-400 duration-150 transition-all text-white px-4 py-2 rounded-md"
-            @click="showMessage">Show Message</button>
-    </div>
-
     <!-- Toggle Menu Example -->
     <div class="bg-slate-800 p-8 rounded-md border border-gray-700 mt-8 flex flex-col justify-center items-center"
         x-data="{ open: false }">
@@ -140,6 +207,8 @@
     </div>
 
 
+    <!-- alpine dropdown  -->
+    <script src="./x-data-alpine.js"></script>
     <!-- date & time  -->
     <script>
         function initClock() {
